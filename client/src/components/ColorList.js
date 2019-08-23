@@ -26,7 +26,8 @@ const ColorList = ({ colors, updateColors }) => {
         Authorization: token
       }
     };
-    // await axios.put(``, body, context)
+    let body = { ...colorToEdit };
+    await axios.put(`http://localhost:5000/api/colors/${colorToEdit.id}`, body, context)
   };
 
   const deleteColor = async color => {
