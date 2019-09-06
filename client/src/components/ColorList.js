@@ -27,7 +27,8 @@ const ColorList = ({ colors, updateColors }) => {
       }
     };
     let body = { ...colorToEdit };
-    await axios.put(`http://localhost:5000/api/colors/${colorToEdit.id}`, body, context)
+    await axios.put(`http://localhost:5000/api/colors/${colorToEdit.id}`, body, context);
+    updateColors(colors.map(color => color.id === colorToEdit ? colorToEdit : color));
   };
 
   const deleteColor = async color => {
@@ -40,6 +41,7 @@ const ColorList = ({ colors, updateColors }) => {
         }
       };
       await axios.delete(`http://localhost:5000/api/colors/${color.id}`, context);
+      updateColors(colors.filter(color => color.id !== colorToEdit));
     } catch (err) {
       console.error(err.message);
     }
